@@ -1,12 +1,29 @@
 <template>
-	<view class="container">
-		<image src="@/static/logo.png" class="logo"></image>
+	<view>
+		<cu-custom bgColor="bg-blue">
+			<block slot="content">
+				<text>登录</text>
+			</block>
+		</cu-custom>
 
-		<uni-easyinput v-model="username" type="text" placeholder="请输入用户名" class="username" />
+		<view class="container">
+			<view class="text-center">
+				<image src="@/static/logo.png" class="logo"></image>
+			</view>
 
-		<uni-easyinput v-model="password" type="password" placeholder="请输入密码" class="password" />
-
-		<button @click="onLogin()" type="primary" class="login">登录</button>
+			<view class="cu-form-group solid margin-top">
+				<input v-model="username" placeholder="请输入用户名" type="text" />
+			</view>
+			<view class="cu-form-group solid margin-top">
+				<input v-model="password" password placeholder="请输入密码" type="safe-password" />
+			</view>
+			<view class="flex-direction flex margin-top">
+				<button @click="onLogin" class="cu-btn bg-blue lg">登录</button>
+			</view>
+			<view class="margin-top text-center">
+				<text @click="goRegisterPage()" class="text-blue">注册账号</text>
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -39,12 +56,17 @@
 						title: '登录成功'
 					})
 					uni.setStorageSync('token', token)
-					uni.navigateTo({
+					uni.redirectTo({
 						url: '/pages/index/index'
 					})
 				} catch (e) {
 					uni.hideLoading()
 				}
+			},
+			goRegisterPage() {
+				uni.navigateTo({
+					url: '/pages/register/register'
+				})
 			}
 		}
 	}
@@ -52,24 +74,11 @@
 
 <style>
 	.logo {
-		width: 200rpx;
-		height: 200rpx;
+		width: 160rpx;
+		height: 160rpx;
 	}
 
 	.container {
 		padding: 30rpx;
-		text-align: center;
-	}
-
-	.username {
-		margin-top: 30rpx;
-	}
-
-	.password {
-		margin-top: 30rpx;
-	}
-
-	.login {
-		margin-top: 30rpx;
 	}
 </style>

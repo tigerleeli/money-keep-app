@@ -1,29 +1,76 @@
 <template>
-	<view class="container">
+	<view>
+		<cu-custom bgColor="bg-blue" isBack>
+			<block slot="content">
+				<text>记录</text>
+			</block>
+		</cu-custom>
 		
-		<view class="intro">本项目已包含uni ui组件，无需import和注册，可直接使用。在代码区键入字母u，即可通过代码助手列出所有可用组件。光标置于组件名称处按F1，即可查看组件文档。</view>
-		<text class="intro">详见：</text>
-		<uni-link :href="href" :text="href"></uni-link>
+		<button @click="onAdd()" class="cu-btn bg-blue lg add" type="primary">记一笔</button>
 	</view>
 </template>
 
 <script>
+	import {
+		page as pageRecord
+	} from '@/api/record.js'
+
 	export default {
 		data() {
 			return {
-				href: 'https://uniapp.dcloud.io/component/README?id=uniui'
+				pageNum: 1,
+				pageSize: 10,
+				recordList: [],
+				totalNum: 0,
+				totalAmount: 0
 			}
 		},
+		onLoad() {
+			uni.showLoading({
+				title: '正在加载...',
+				mask: true
+			})
+			this.refresh()
+		},
+		onPullDownRefresh() {
+			this.refresh()
+		},
 		methods: {
-
+			async refresh() {
+				try {
+					this.pageNum = 1
+					const {
+						recordList,
+						totalNum,
+						totalAmount
+					} = await pageRecord({
+						pageNum: this.pageNum,
+						pageSize: this.pageSize
+					})
+					this.recordList = recordList
+					this.totalNum = totalNum
+					this.totalAmount = totalAmount
+					console.log(recordList)
+					uni.hideLoading()
+					uni.stopPullDownRefresh()
+				} catch (e) {
+					uni.hideLoading()
+					uni.stopPullDownRefresh()
+				}
+			},
+			onAdd() {
+				uni.navigateTo({
+					url:'/pages/record/add'
+				})
+			}
 		}
 	}
 </script>
 
 <style>
-	.container {
-		padding: 20px;
-		font-size: 14px;
-		line-height: 24px;
+	.add {
+		position: fixed;
+		right: 30rpx;
+		bottom: 30rpx;
 	}
 </style>
