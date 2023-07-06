@@ -5,13 +5,13 @@
 				<text>记账记录</text>
 			</block>
 			<block slot="right">
-				<button @click="onAdd()" class="cu-btn shadow round line-white margin-lg">新增账户</button>
+				<text @click="goMyPage()" class="cuIcon-people margin-right" style="font-size: 40rpx;"></text>
 			</block>
 		</cu-custom>
 
 		<view v-if="recordList.length">
 			<view class="padding-sm flex justify-between">
-				<view>共{{totalNum}}记录</view>
+				<view>共{{totalNum}}条记录</view>
 			</view>
 
 			<view v-for="item in recordList" :key="item.id"
@@ -26,11 +26,16 @@
 							{{item.categoryName}}
 						</text>
 					</view>
-
 				</view>
-				<view class="amount">
-					<text v-if="item.type == 1">-</text>
-					<text>{{item.amount}}</text>
+
+				<view>
+					<view class="amount text-right">
+						<text v-if="item.type == 1">-</text>
+						<text>{{item.amount}}</text>
+					</view>
+					<view v-if="item.remark" class="margin-top-sm">
+						{{item.remark}}
+					</view>
 				</view>
 			</view>
 
@@ -69,6 +74,13 @@
 				mask: true
 			})
 			this.refresh()
+
+			uni.$on('refreshRecordList', () => {
+				this.refresh()
+			})
+		},
+		onUnload() {
+			uni.$off('refreshRecordList')
 		},
 		onPullDownRefresh() {
 			this.refresh()
@@ -122,6 +134,11 @@
 			onAdd() {
 				uni.navigateTo({
 					url: '/pages/record/add'
+				})
+			},
+			goMyPage() {
+				uni.navigateTo({
+					url: '/pages/my/my'
 				})
 			}
 		}

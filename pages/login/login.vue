@@ -38,6 +38,15 @@
 				password: null
 			}
 		},
+		onLoad() {
+			const username = uni.getStorageSync('username')
+			const password = uni.getStorageSync('password')
+			if (username && password) {
+				this.username = username
+				this.password = password
+				this.onLogin()
+			}
+		},
 		methods: {
 			async onLogin() {
 				try {
@@ -57,8 +66,11 @@
 					})
 					uni.setStorageSync('token', token)
 					uni.redirectTo({
-						url: '/pages/index/index'
+						url: '/pages/record/list'
 					})
+
+					uni.setStorageSync('username', this.username)
+					uni.setStorageSync('password', this.password)
 				} catch (e) {
 					uni.hideLoading()
 				}
@@ -76,6 +88,8 @@
 	.logo {
 		width: 160rpx;
 		height: 160rpx;
+		border-radius: 30rpx;
+		margin-top: 30rpx;
 	}
 
 	.container {

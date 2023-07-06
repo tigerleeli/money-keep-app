@@ -145,6 +145,8 @@
 					})
 					this.amount = null
 					this.remark = null
+
+					uni.$emit('refreshRecordList')
 				} catch (e) {
 					uni.hideLoading()
 				}

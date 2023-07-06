@@ -9,3 +9,7 @@ export function login(data) {
 export function register(data) {
 	return request('/user/register', data, 'post')
 }
+
+export function get() {
+	return request('/user/get', {}, 'get')
+}

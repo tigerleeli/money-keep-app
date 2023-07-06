@@ -8,7 +8,7 @@
 			"style": {}
 		},
 		{
-			"path": "pages/index/index",
+			"path": "pages/record/list",
 			"style": {
 				"enablePullDownRefresh": true
 			}
@@ -25,6 +25,10 @@
 			"style": {
 				"enablePullDownRefresh": true
 			}
+		}, {
+			"path": "pages/my/my",
+			"style": {}
+
 		}
 	],
 	"globalStyle": {

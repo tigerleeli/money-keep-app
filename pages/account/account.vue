@@ -66,7 +66,7 @@
 				uni.showModal({
 					title: '新增账户',
 					editable: true,
-					placeholderText: '请输入账号名称',
+					placeholderText: '请输入账户名称',
 					success: async res => {
 						if (res.confirm && res.content) {
 							try {
