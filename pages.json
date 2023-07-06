@@ -15,6 +15,16 @@
 		}, {
 			"path": "pages/record/add",
 			"style": {}
+		}, {
+			"path": "pages/account/account",
+			"style": {
+				"enablePullDownRefresh": true
+			}
+		}, {
+			"path": "pages/category/category",
+			"style": {
+				"enablePullDownRefresh": true
+			}
 		}
 	],
 	"globalStyle": {
