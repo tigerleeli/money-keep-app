@@ -17,7 +17,11 @@
 			<view v-for="item in recordList" :key="item.id"
 				class="padding flex justify-between solid-bottom bg-white align-center">
 				<view>
-					<view>
+					<view class="text-grey">
+						{{item.createTime | timeFrom}}
+					</view>
+					
+					<view class="margin-top-sm">
 						<text>{{item.accountName}}</text>
 					</view>
 
@@ -28,8 +32,8 @@
 					</view>
 				</view>
 
-				<view>
-					<view class="amount text-right">
+				<view class="text-right">
+					<view class="amount">
 						<text v-if="item.type == 1">-</text>
 						<text>{{item.amount}}</text>
 					</view>
@@ -46,7 +50,6 @@
 
 		<view v-else class="padding text-center">请点击右下角记一笔</view>
 
-
 		<button @click="onAdd()" class="cu-btn bg-blue lg add" type="primary">记一笔</button>
 	</view>
 </template>
@@ -55,7 +58,11 @@
 	import {
 		page as pageRecord
 	} from '@/api/record.js'
-
+	
+	import timeFrom from '@/util/timeFrom.js'
+	
+	import moment from 'moment'
+	
 	export default {
 		data() {
 			return {
@@ -66,6 +73,11 @@
 				totalAmount: 0,
 				accountList: [],
 				isLoadmore: false
+			}
+		},
+		filters: {
+			timeFrom(val) {
+				return timeFrom(moment(val).valueOf())
 			}
 		},
 		onLoad() {
