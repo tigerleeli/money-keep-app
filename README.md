@@ -130,7 +130,7 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 路径： \util\constant.js
 ```js
 // #ifdef APP-PLUS
-export const remoteUrl = 'http://192.168.1.190:8888';
+export const remoteUrl = 'http://192.168.1.1:8888';
 // #endif
 
 // #ifdef H5 || MP-WEIXIN
