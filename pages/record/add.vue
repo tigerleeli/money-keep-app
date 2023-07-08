@@ -91,12 +91,16 @@
 				this.categoryList = await listCategory(this.type)
 				if (this.categoryList.length) {
 					this.selectedCategory = this.categoryList[0]
+				} else {
+					this.selectedCategory = null
 				}
 			},
 			async listAccount() {
 				this.accountList = await listAccount()
 				if (this.accountList.length) {
 					this.selectedAccount = this.accountList[0]
+				} else {
+					this.selectedAccount = null
 				}
 			},
 			async onSave() {
